@@ -2,7 +2,7 @@
 
 I'm attempting to replicate Figure 1b of \citet{Nummelin_2017} so that I can create a similar plot in my own research, which involves comparing the ocean response to anthropogenic aerosols (i.e. the historicalAA experiment) and greenhouse gases (historicalGHG). I've focused on three key curves from Figure 1b: the trend in ocean heat transport convergence ($\overline{HTC}$), surface heat flux at ocean surface ($\overline{SFL}$) and ocean heat content tendency ($\overline{OHC'}$}).
 
-Performing the calculations on the native model ocean grid (which is curvilinear for the NorESM1-M model) is rather complicated, so at some point during the calculations (described below) I regrid to a regular rectilinear latitude/longitude grid. The same problems identified below are evident when I analyse the CSIRO-Mk3-6-0 model (whose ocean is on a regular lat/lon grid), so it appears that the regridding is not the issue.
+Performing the calculations on the native model ocean grid (which is curvilinear for the NorESM1-M model) is rather complicated, so at some point during the calculations (described below) I regrid to a regular rectilinear latitude/longitude grid. The same problems identified below are evident when I analyse the CSIRO-Mk3-6-0 model (whose ocean is on a regular lat/lon grid), so it appears that the regridding is not the major issue.
 
 Once consequence of regridding the data is that I present the results in units of $W$ as opposed to $Wm^{-2}$, as it's difficult for me to divide the final result by area because once the data is regridded I can't use the relevant areacello file.
 
