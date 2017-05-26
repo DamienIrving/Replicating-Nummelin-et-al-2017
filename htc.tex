@@ -9,6 +9,6 @@ northward_ocean_heat_transport
 hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc
 \end{verbatim}
 
-The reason for the multiplication by -1 is that \textbf{numpy.diff} calculates $diff_{n} = value_{n+1} - value_{n}$, whereas the calculation used in \citep{Nummelin_2017} is $diff_{n} = value_{n} - value_{n+1}$.    
+The reason for the multiplication by -1 is that \textbf{numpy.diff} calculates $diff_{n} = value_{n+1} - value_{n}$, whereas the calculation used in \citet{Nummelin_2017} is $diff_{n} = value_{n} - value_{n+1}$.    
 
 The \textbf{plot_heat_trends.py} script then calculates the linear trend at each latitude and plots the result. 
