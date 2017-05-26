@@ -1,4 +1,5 @@
 rationale.tex
+figures/htc-hfds-ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all_nummelin/htc-hfds-ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all_nummelin.png
 htc.tex
 figures/test_rcp85_htc/test_rcp85_htc.png
 hfds.tex
