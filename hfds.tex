@@ -2,7 +2,7 @@
 
 My surface heat flux curve (Figure \ref{fig:hfds}) has a similar shape to Figure 1b of \citet{Nummelin_2017} (any differences are probably just explained by the fact that I haven't divided by area) but the magnitude seems too small relative to the ocean heat transport convergence curve.
 
-When the \textbf{calc_surface_forcing_maps.py} script is passed a monthly timescale hfds file, it:
+When the \textbf{calc_surface_forcing_maps.py} script is passed a monthly timescale hfds file, it does the following:
 \begin{enumerate}
 \item Converts the data to an annual timescale
 \item Multiplies each grid point value by its corresponding area (from the areacello file; this converts the units from $Wm^{-2}$ to $W$)
