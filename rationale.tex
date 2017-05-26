@@ -1,8 +1,5 @@
-I'm attempting to replicate Figure 1b of \citet{Nummelin_2017} so that I can create a similar plot comparing the ocean response to anthropogenic aerosols (i.e. the historicalAA experiment) and greenhouse gases (historicalGHG). I've focused on three key curves from Figure 1b: the trend in ocean heat transport convergence ($\overline{HTC}$), surface heat flux at ocean surface ($\overline{SFL}$) and ocean heat content tendency ($\overline{OHC'}$}).
+I'm attempting to replicate Figure 1b of \citet{Nummelin_2017} so that I can create a similar plot in my own research, which involves comparing the ocean response to anthropogenic aerosols (i.e. the historicalAA experiment) and greenhouse gases (historicalGHG). I've focused on three key curves from Figure 1b: the trend in ocean heat transport convergence ($\overline{HTC}$), surface heat flux at ocean surface ($\overline{SFL}$) and ocean heat content tendency ($\overline{OHC'}$}).
 
-Performing the calculations on the native model grid is rather complicated, so to start I'm trying to...
-
-
-I have the same issues with the CSIRO-Mk3-6-0 model (whose ocean is on a regular lat/lon grid), so it's not the regridding that is the issue.
+Performing the calculations on the native model ocean grid (which is curvilinear for the NorESM1-M model) is rather complicated, so at some point during the calculations (see below) I regrid to a regular rectilinear latitude/longitude grid. The same problems identified below are evident when I analyse the CSIRO-Mk3-6-0 model (whose ocean is on a regular lat/lon grid), so it's not the regridding that is the issue.
 
 
