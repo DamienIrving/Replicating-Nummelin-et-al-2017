@@ -1,9 +1,9 @@
 \section{Ocean heat transport convergence}
 
-It seems that I can successfully reproduce the ocean heat transport curve (Figure \ref{fig:htc}). When the \textbf{calc_convergence_maps.py} script is passed a hfbasin file, it simply calculates the difference between adjacent values using \textbf{numpy.diff} and then multiplies the result by -1:
+It seems that I can successfully reproduce the ocean heat transport curve (Figure \ref{fig:htc}). When the \textbf{calc_ocean_heat_transport_convergence.py} script is passed a hfbasin file, it simply calculates the difference between adjacent values using \textbf{numpy.diff} and then multiplies the result by -1:
 
 \begin{verbatim}
-$ python ~/ocean_analysis/data_processing/calc_convergence_maps.py
+$ python ~/ocean_analysis/data_processing/calc_ocean_heat_transport_convergence.py
 hfbasin_Omon_NorESM1-M_rcp85_r1i1p1_200601-210012.nc
 northward_ocean_heat_transport
 hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc
