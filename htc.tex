@@ -1,7 +1,14 @@
 \section{Ocean heat transport convergence}
 
-It seems that I can successfully reproduce the ocean heat transport curve. When the \verb!calc_convergence_maps.py! script is passed a hfbasin file, it simply calculates the difference between adjacent \texttt{values} using \verb!numpy.diff!.    
+It seems that I can successfully reproduce the ocean heat transport curve. When the \verb|calc_convergence_maps.py| script is passed a hfbasin file, it simply calculates the difference between adjacent values using \verb|numpy.diff| and then multiplies the result by -1:
 
 \begin{verbatim}
-python ~/ocean_analysis/data_processing/calc_convergence_maps.py hfbasin_Omon_NorESM1-M_rcp85_r1i1p1_200601-210012.nc northward_ocean_heat_transport hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc
+$ python ~/ocean_analysis/data_processing/calc_convergence_maps.py
+hfbasin_Omon_NorESM1-M_rcp85_r1i1p1_200601-210012.nc
+northward_ocean_heat_transport
+hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc
 \end{verbatim}
+
+The reason for the multiplication by -1 is that numpy.diff calculates $diff_{n} = value_{n+1} - value_{n}$, whereas the calculation used in \citep{}Nummelin_2017} is $diff_{n} = value_{n} - value_{n+1}$.    
+
+The \verb|plot_heat_trends.py| script then calculates the linear trend at each latitude and plots the result. 
