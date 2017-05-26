@@ -1,0 +1,22 @@
+\section{Ocean heat content tendency}
+
+The magnitude of my ocean heat content tendency trends are much, much smaller than the heat transport convergence or surface flux trends (Figure \ref{fig:ohc}). 
+
+When annual timescale sea water potential temperature files (which I'd calculated from the monthly timescale data previously) are passed to the \textbf{calc_ohc_maps.py} script, it does the following:
+\begin{enumerate}
+\item Multiplies each grid cell by its corresponding surface area (from the areacello file)
+\item Regrids to a regular latitude/longitude grid
+\item Calculates the vertical integral at each lat/lon point (i.e. a weighted sum of the temperature values in each vertical column, where the weights are the depth spanned by each segment of the column)
+\item Multiplies the resulting array by density (assumed constant at 1023 $kg\; m^{-3}$) and specific heat (4000 $J\; kg^{-1}\; K$)
+\item Calculates the (unweighted) zonal sum
+\end{enumerate}
+
+\begin{verbatim}
+python ~/ocean-analysis/data_processing/calc_ohc_maps.py 
+thetao_Oyr_NorESM1-M_rcp85_r1i1p1_*.nc 
+sea_water_potential_temperature 
+ohc-by-areacello-maps_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
+--area_file areacello_fx_NorESM1-M_rcp85_r0i0p0.nc
+\end{verbatim}
+
+The \textbf{plot_heat_trends.py} script then takes the square root of the ocean heat content zonal sum data (i.e. to represent the ocean heat content tendency) and calculates the linear trend at each latitude. Those trends are then are squared and divided by 86400 to convert to units of $Ws^{-1}$. 
