@@ -2,7 +2,7 @@
 
 The magnitude of my ocean heat content tendency trends are much, much smaller than the heat transport convergence or surface flux trends (Figure \ref{fig:ohc}). 
 
-When annual timescale sea water potential temperature files (which I'd calculated from the monthly timescale data previously) are passed to the \textbf{calc_ohc_maps.py} script, it does the following:
+When annual timescale sea water potential temperature files (which I'd calculated from the monthly timescale data previously) are passed to the \textbf{calc_ohc_maps.py} script, it does the following in order to calculate the ocean heat content:
 \begin{enumerate}
 \item Multiplies each grid cell by its corresponding surface area (from the areacello file)
 \item Calculates the vertical integral at each grid point (i.e. a weighted sum of the temperature values in each vertical column, where the weights are the depth spanned by each segment of the column)
@@ -23,7 +23,7 @@ ohc-by-areacello-maps_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc
 
 At this point I'm confident in my results. If I sum my zonal OHC values to get a global average, for instance, the magnitude of that global mean OHC timeseries compares well with other published timeseries.
 
-The \textbf{plot_heat_trends.py} script then takes those zonal OHC values and does the following:
+The \textbf{plot_heat_trends.py} script then takes those zonal OHC values and does the following to calculate and plot the trend on ocean heat content tendency:
 \begin{enumerate}
 \item Divides by $60 \times 60 \times 24 \times 365.25$ to convert the units from J to W
 \item Takes the square root in order to approximate the derivative of the ocean heat content timeseries at each latitude (i.e. to get the ocean heat content tendency)*
