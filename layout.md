@@ -5,5 +5,5 @@ figures/test_rcp85_htc/test_rcp85_htc.png
 hfds.tex
 figures/test_rcp85_hfds-zonal-sum/test_rcp85_hfds-zonal-sum.png
 ohc.tex
-figures/test_rcp85_ohc-zonal-sum/test_rcp85_ohc-zonal-sum.png
+figures/test_rcp85_ohc-zonal-sum/ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all.png
 next.tex
