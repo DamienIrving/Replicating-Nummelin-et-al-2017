@@ -26,7 +26,7 @@ At this point I'm confident in my results. If I sum my zonal OHC values to get a
 The \textbf{plot_heat_trends.py} script then takes those zonal OHC values and does the following to calculate and plot the trend on ocean heat content tendency:
 \begin{enumerate}
 \item Divides by the number of seconds in a year ($60 \times 60 \times 24 \times 365.25$) to convert the units from J to W
-\item Takes the square root in order to approximate the derivative of the ocean heat content timeseries at each latitude (i.e. to get the ocean heat content tendency)*
+\item Takes the square root in order to approximate the instantaneous derivative of the ocean heat content at each timestep (i.e. to get the ocean heat content tendency)*
 \item Calculates the linear trend at each latitude
 \item Squares those trends so that the units are $W s^{-1}$
 \end{enumerate}
