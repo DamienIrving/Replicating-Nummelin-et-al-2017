@@ -30,7 +30,7 @@ ohc-zs_Oyr_CSIRO-Mk3-6-0_rcp85_r1i1p1_all.nc
 
 The \textbf{plot_heat_trends.py} script then takes those zonal, annual mean OHC values (units = $J$) and does the following to estimate the ocean heat content tendency (and then calculates and plots the trend):
 \begin{enumerate}
-\item Fits a second order polynomial (i.e. ohc_{lat} = $at^2 + bt + c$) to the OHC values at each latitude (the time axis is first converted to seconds to ensure correct units later on)
+\item Fits a second order polynomial (i.e. $ohc_{lat} = at^2 + bt + c$) to the OHC values at each latitude (the time axis is first converted to seconds to ensure correct units later on)
 \item Estimates the ocean heat content tendency as the derivative of that polynomial (i.e. $ohct_{lat} = 2at + b$) (since it's a time derivative the units are now $Js^{-1} = W$)
 \item Calculates the linear trend at each latitude
 \end{enumerate}
