@@ -1,36 +1,38 @@
-\section{Ocean heat content tendency}
+\section{Appendix: Ocean heat content tendency}
 
-The magnitude of my ocean heat content tendency trends are much, much smaller than the heat transport convergence or surface flux trends (Figure \ref{fig:ohc}). 
-
-When annual timescale sea water potential temperature files (which I'd calculated from the monthly timescale data previously) are passed to the \textbf{calc_ohc_maps.py} script, it does the following in order to calculate the ocean heat content:
+When sea water potential temperature data is passed to the \textbf{calc_ohc.py} script, it does the following (on the native model grid) in order to calculate the ocean heat content:
 \begin{enumerate}
 \item Multiplies each grid cell by its corresponding surface area (from the areacello file)
 \item Calculates the vertical integral at each grid point (i.e. a weighted sum of the temperature values in each vertical column, where the weights are the depth spanned by each segment of the column)
 \item Multiplies the resulting array by density (assumed constant at 1023 $kg\; m^{-3}$) and specific heat (4000 $J\; kg^{-1}\; K$)
-\item Regrids to a regular latitude/longitude grid
-\item Calculates the (unweighted) zonal sum
 \end{enumerate}
 
 (I had hoped to simplify steps 1 and 2 by multiplying by volume, but the NorESM1-M volcello data I've got is erroneous.) 
 
 \begin{verbatim}
-python ~/ocean-analysis/data_processing/calc_ohc_maps.py 
-thetao_Oyr_NorESM1-M_rcp85_r1i1p1_*.nc 
-sea_water_potential_temperature 
-ohc-by-areacello-maps_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
+python ~/ocean-analysis/data_processing/calc_ohc.py 
+thetao_Omon_NorESM1-M_rcp85_r1i1p1_*.nc 
+sea_water_potential_temperature
 --area_file areacello_fx_NorESM1-M_rcp85_r0i0p0.nc
 \end{verbatim}
 
-At this point I'm confident in my results. If I sum my zonal OHC values to get a global average, for instance, the magnitude of that global mean OHC timeseries compares well with other published timeseries.
+I'm confident that the OHC calculation is correct. If I sum my zonal OHC values to get a global average, for instance, the magnitude of that global mean OHC timeseries compares well with other published timeseries.
 
-The \textbf{plot_heat_trends.py} script then takes those zonal OHC values and does the following to calculate and plot the trend on ocean heat content tendency:
+Similar to the surface heat flux, the \textbf{calc_surface_forcing_maps.py} script is then used to convert to an annual timescale, regrid to a regular latitude/longitude grid (if required) and calculate the (unweighted) zonal sum:
+
+\begin{verbatim}
+$ python calc_surface_forcing_maps.py 
+ohc_Omon_CSIRO-Mk3-6-0_rcp85_r1i1p1_*.nc
+ocean_heat_content
+ohc-zs_Oyr_CSIRO-Mk3-6-0_rcp85_r1i1p1_all.nc
+--zonal_stat sum
+\end{verbatim}
+
+The \textbf{plot_heat_trends.py} script then takes those zonal, annual mean OHC values (units = $J$) and does the following to estimate the ocean heat content tendency (and then calculates and plots the trend):
 \begin{enumerate}
-\item Divides by the number of seconds in a year ($60 \times 60 \times 24 \times 365.25$) to convert the units from J to W
-\item Takes the square root in order to approximate the instantaneous derivative of the ocean heat content at each timestep (i.e. to get the ocean heat content tendency)*
+\item Fits a second order polynomial (i.e. ohc_{lat} = $at^2 + bt + c$) to the OHC values at each latitude (the time axis is first converted to seconds to ensure correct units later on)
+\item Estimates the ocean heat content tendency as the derivative of that polynomial (i.e. $ohct_{lat} = 2at + b$) (since it's a time derivative the units are now $Js^{-1} = W$)
 \item Calculates the linear trend at each latitude
-\item Squares those trends so that the units are $W s^{-1}$
 \end{enumerate}
 
-Somewhere in this sequence of calculations performed by \textbf{plot_heat_trends.py} is where the problem must lie.
-
-*Using the square root to estimate the derivative was the approach taken by \citet{Nummelin_2017}. They assume the ocean heat content tendency to be a linear function, which means that its integral (ocean heat content) should be a quadratic function. In this framework, the square root represents the ocean heat content tendency. They feel it's a better approximation of the ocean heat content tendency than a simple $(y_{n+1} - y_n) / (x_{n+1} - x_n)$ calculation, since we only have annual (or monthly) means, not instantaneous values needed for calculating the tendency. They suggest that another approach would be to fit a quadratic equation to the ocean heat content data and take the slope from there, which gives roughly the same result. They also suggest that since heat content is usually only slightly quadratic (and hence heat content tendency trends are small), even using heat content instead of heat content tendency often gives reasonable results (this seems to be what people often do, although it's not technically correct to compare fluxes with heat content). When I tried that the shape of the curve was somewhat similar but the magnitude was vastly different.
+Using the derivative of a fitted second order polynomial was the approach taken by \citet{Nummelin_2017}. They assume the ocean heat content tendency to be a linear function, which means that its integral (ocean heat content) should be a quadratic function. They feel it's a better approximation of the ocean heat content tendency than a simple $(y_{n+1} - y_n) / (x_{n+1} - x_n)$ calculation, since we only have annual (or monthly) means, not instantaneous values needed for calculating the tendency. They also suggest that since heat content is usually only slightly quadratic (and hence heat content tendency trends are small), even using heat content instead of heat content tendency often gives reasonable results (this seems to be what people often do, although it's not technically correct to compare fluxes with heat content).
