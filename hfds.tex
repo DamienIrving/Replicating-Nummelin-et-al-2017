@@ -1,12 +1,10 @@
-\section{Surface heat flux}
-
-My surface heat flux curve (Figure \ref{fig:hfds}) has a similar shape to Figure 1b of \citet{Nummelin_2017} (any differences are probably just explained by the fact that I haven't divided by area) but the magnitude seems too small relative to the ocean heat transport convergence curve.
+\section{Appendix: Surface heat flux methods}
 
 When the \textbf{calc_surface_forcing_maps.py} script is passed a monthly timescale hfds file, it does the following:
 \begin{enumerate}
 \item Converts the data to an annual timescale
-\item Multiplies each grid point value by its corresponding area (from the areacello file; this converts the units from $Wm^{-2}$ to $W$)
 \item Regrids to a regular lat/lon grid (if necessary)
+\item Multiplies each grid point value by its corresponding area (from the areacello file; this converts the units from $Wm^{-2}$ to $W$)
 \item Calculates the (unweighted) zonal sum
 \end{enumerate}
 
@@ -15,12 +13,9 @@ $ python ~/ocean_analysis/data_processing/calc_surface_forcing_maps.py
 hfds_Omon_NorESM1-M_rcp85_r1i1p1_200601-210012.nc 
 surface_downward_heat_flux_in_sea_water 
 hfds-by-areacello-zs_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
---area_file areacello_fx_NorESM1-M_rcp85_r0i0p0.nc
+--area
 \end{verbatim}
 
-I went for the zonal sum as opposed to zonal mean because I figured the hfbasin data represents a zonal sum (i.e. the accumulated heat transport across a given latitude circle).
+Ordinarily I would have multiplied by area on the native grid (using the areacello data) before regridding, however for some reason the iris regridding function gives crazy values if I do this for the NorESM1-M model (not sure why - it doesn't do this in other situations). 
 
-The \textbf{plot_heat_trends.py} script then calculates the linear trend at each latitude and plots the result. I'm at a loss to explain why the amplitude of the plotted trends are slightly too small relative to the ocean heat transport convergence trends.
-
-
-
+The \textbf{plot_heat_trends.py} script then calculates the linear trend at each latitude and plots the result.
