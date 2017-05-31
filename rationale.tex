@@ -2,9 +2,9 @@
 
 I'm attempting to replicate Figure 1b of \citet{Nummelin_2017} so that I can create a similar plot in my own research, which involves comparing the ocean response to anthropogenic aerosols (i.e. the historicalAA experiment) and greenhouse gases (historicalGHG). I've focused on three key curves from Figure 1b: the trend in ocean heat transport convergence ($\overline{HTC}$), surface heat flux at ocean surface ($\overline{SFL}$) and ocean heat content tendency ($\overline{OHC'}$}).
 
-As shown in Figure \ref{fig:full}, I'm having trouble with the relative magnitude of each of the curves. In an attempt to get to the bottom of the problem, I've described in detail (see sections below) how each of the curves was calculated. Here's a few notes on my approach:
+Here's a few notes on my methodology:
 \begin{itemize}
-\item Performing the calculations on the native model ocean grid (which is curvilinear for the NorESM1-M model) is rather complicated, so at some point during the calculations described below I regrid to a regular rectilinear latitude/longitude grid. The same problem of incorrect magnitudes are evident when I analyse the CSIRO-Mk3-6-0 model (whose ocean is on a regular lat/lon grid), so it appears that the regridding is not the major issue.
+\item Performing the calculations on the native model ocean grid (which is curvilinear for the NorESM1-M model) is rather complicated, so at some point during the calculations described below I regrid to a regular rectilinear latitude/longitude grid.
 \item One consequence of regridding the data is that I present the results in units of $W\; s^{-1}$ as opposed to $W\; m^{-2}\; s^{-1}$, as it's difficult for me to divide the final result by area because once the data is regridded I can't use the relevant areacello file.
 \end{itemize}
 
@@ -13,6 +13,9 @@ All python scripts referred to below can be found at \url{https://github.com/Dam
 $ python ~/ocean-analysis/visualisation/plot_heat_trends.py 
 hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc 
 hfds-by-areacello-zs_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
-ohc-by-areacello-maps_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
-htc-hfds-ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all_nummelin.png
+ohc-zs_Oyr_NorESM1-M_rcp85_r1i1p1_all.nc 
+htc-hfds-ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all_nummelin.png --nummelin
 \end{verbatim}
+
+As shown in Figure \ref{fig:noresm_full}, I'm seeing a bit of a discrepancy between the ocean heat content tendency and that inferred by the sum of surface heat flux and heat transport convergence.
+
