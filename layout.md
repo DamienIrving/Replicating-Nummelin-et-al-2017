@@ -5,5 +5,4 @@ figures/htc-hfds-ohc_Oyr_CSIRO-Mk3-6-0_rcp85_r1i1p1_all_nummelin/htc-hfds-ohc_Oy
 htc.tex
 hfds.tex
 ohc.tex
-figures/test_rcp85_ohc-zonal-sum/ohc_Oyr_NorESM1-M_rcp85_r1i1p1_all.png
 next.tex
