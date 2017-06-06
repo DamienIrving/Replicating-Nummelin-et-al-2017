@@ -11,4 +11,6 @@ hfbasin-convergence_Omon_NorESM1-M_rcp85_r1i1p1_all.nc
 
 The reason for the multiplication by -1 is that \textbf{numpy.diff} calculates $diff_{n} = value_{n+1} - value_{n}$, whereas the calculation used in \citet{Nummelin_2017} is $diff_{n} = value_{n} - value_{n+1}$.    
 
+If \textbf{calc_ocean_heat_transport_convergence.py} is passed a hfy file on a lat/lon grid, it simply calculates the zonal sum at each latitude (i.e. to create a hfbasin-equivalent variable) prior to proceeding as above. 
+
 The \textbf{plot_heat_trends.py} script then converts the monthly timeseries to an annual timeseries and calculates the linear trend at each latitude and plots the result. 
