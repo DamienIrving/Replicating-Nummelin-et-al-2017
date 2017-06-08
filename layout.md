@@ -9,4 +9,3 @@ hfds.tex
 ohc.tex
 next.tex
 figures/htc-hfds-ohc_Oyr_CSIRO-Mk3-6-0_rcp85_r1i1p1_all_runmean10/htc-hfds-ohc_Oyr_CSIRO-Mk3-6-0_rcp85_r1i1p1_all_runmean10.png
-figures/htc-hfds-ohc_Oyr_GISS-E2-R_rcp85_r1i1p1_all1/htc-hfds-ohc_Oyr_GISS-E2-R_rcp85_r1i1p1_all1.png
